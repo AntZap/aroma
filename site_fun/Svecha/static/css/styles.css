@@ -1,0 +1,21 @@
+
+.sidebar-nav {
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+h1 a {
+        color: #641349;
+        font-family: 'Lobster';
+    }
+
+h2 a {
+        color: #ff7f50;
+        font-family: 'Lobster';
+    }
+
+h3 a {
+        color: #004d00;
+        font-family: 'Lobster';
+    }

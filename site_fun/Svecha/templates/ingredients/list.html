@@ -1,0 +1,47 @@
+{% extends "base_generic.html" %}
+
+
+<!-- с load  пытался сделать стиль к оглавнению .-->
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+</head>
+ <link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+        <body>
+            <div>
+
+                <h1> <a >  Добро пожаловать в игру, в которой можно создать красивую свечу!</h1>
+
+                <h1> <a > Полный перечень всех ингредиентов для создания свечи:</h1>
+            </div>
+
+   <!-- Пробегаем по представлению с ингредиентами и составляющими, в каждом ингредиенте есть свои составляющие с точной привязкой. Мы пробегаем по продуктам и проверяем
+    есть ли привязка к этому ингредиенту и тогда показываем список. в названии добавляем ссылку на делати. чтобы открыть вкладку с названием этого составляющего
+    для этого указываем ссылку на детали в svecha/urls и дальше отображаем id продукта и английское наименование.
+    делали этой ссылки прописываем в detail-->
+  <ul>
+    {{product_list}}
+      {% for ingredient in ingredients %}
+        <h2><li><a href="{% url 'Svecha:sostav' ingredient.slug %}">{{ ingredient.name }} </a></li> </h2>
+
+
+      </p>
+        {% endfor %}
+  </ul>
+
+{% endblock %}
+
+
+ <!-- убрал из 24 стоки чтобы не дублировать информации
+ <li>{{ product.description }}</li>
+<li>{{ product.primechanie }}</li>
+код чтобы вывести все составляющие каждой категории
+<ul>
+          {% for product in products %}
+            {% if product.ingredients == ingredient %}
+                <li><a href="{% url 'Svecha:ingredients_detail' product.id product.slug  %}">{{ product.name}} </a></li>
+            {% endif %}
+          {% endfor %}
+      </ul>
+
+-->
