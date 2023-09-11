@@ -10,8 +10,10 @@
 <body>
 
 <div class="container">
+
+    <h3>  <a> Выберите ингредиенты: </a></h3>
     <p></p>
-    <form method=POST action="{% url 'Svecha:s' temp temp1 temp2 %}">
+    <form method=POST action="">
         {% csrf_token %}
 
             <table>
@@ -21,54 +23,39 @@
 
             <table>
 
-                <input type = "Submit" value = "Submit"  >
+                <input type = "Submit" value = "Подтвердить"  >
     </form>
 
 
 
-    <!--{%  if submitbutton  == "Submit"  %}
-    <li><a href="{% url 'Svecha:s'  temp temp1 temp2 %}">Результат</a></li>
-    <h2> <a > <li>{{ aroma }}</li> </h2>
-    {% endif %}-->
+
+               <h2> <a href="{% url 'Svecha:s' temp temp1 temp2 %}">Посмотреть на свечу</a> </h2>
 
 
+<!--                {% for product in products %}-->
+
+<!--                    {% if  temp == product.slug   %}-->
+
+<!--                    <h2> <a > <li>{{ product.name }}</li> </h2>-->
+<!--                    <h3> <a > <li>{{ product.description }}</li> </h3>-->
+<!--                    <h3> <a > <li>{{ product.primechanie }}</li> </h3>-->
+<!--                    {% endif %}-->
+
+<!--                    {% if temp1 == product.slug%}-->
+<!--                    <h2> <a > <li>{{ product.name }}</li> </h2>-->
+<!--                    <h3> <a > <li>{{ product.description }}</li> </h3>-->
+<!--                    <h3> <a > <li>{{ product.primechanie }}</li> </h3>-->
+<!--                    {% endif %}-->
+<!--                    {% if temp2 == product.slug %}-->
+<!--                    <h2> <a > <li>{{ product.name }}</li> </h2>-->
+<!--                    <h3> <a > <li>{{ product.description }}</li> </h3>-->
+<!--                    <h3> <a > <li>{{ product.primechanie }}</li> </h3>-->
+<!--                    {% endif %}-->
 
 
-                {% for product in products %}
-
-                    {% if  temp == product.name   %}
-
-                    <h2> <a > <li>{{ product.name }}</li> </h2>
-                    <h3> <a > <li>{{ product.description }}</li> </h3>
-                    <h3> <a > <li>{{ product.primechanie }}</li> </h3>
-                    {% endif %}
-
-                    {% if temp1 == product.name%}
-                    <h2> <a > <li>{{ product.name }}</li> </h2>
-                    <h3> <a > <li>{{ product.description }}</li> </h3>
-                    <h3> <a > <li>{{ product.primechanie }}</li> </h3>
-                    {% endif %}
-                    {% if temp2 == product.name %}
-                    <h2> <a > <li>{{ product.name }}</li> </h2>
-                    <h3> <a > <li>{{ product.description }}</li> </h3>
-                    <h3> <a > <li>{{ product.primechanie }}</li> </h3>
-                    {% endif %}
+<!--                {% endfor %}-->
 
 
-                {% endfor %}
-
-
-<!--    <table>-->
-
-<!--        {% for item in products %}-->
-<!--        <tr>-->
-<!--            <td>{{ item.ingredients }}</td>-->
-<!--            <td>{{ item.name }}</td>-->
-
-
-<!--        </tr>-->
-<!--        {% endfor %}-->
-<!--    </table>-->
 </div>
 </body
 
