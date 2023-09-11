@@ -35,16 +35,14 @@ def ing(request, category_slug=None):
 
 # Create your views here.
 def sozdanie(request,):
-    temp =None
-    temp1 = None
-    temp2 = None
+    submitbutton = request.POST.get("Submit")
     products = Product.objects.all()
     location_list = Sozdanie_svechi()
-    if request.GET:
+    if request.POST:
         temp = request.POST['aroma']
         for product in products :
             if temp == product.name:
-                temp = product.slug
+                 temp = product.slug
         temp1 = request.POST['kras']
         for product in products:
             if temp1 == product.name:
@@ -54,22 +52,51 @@ def sozdanie(request,):
             if temp2 == product.name:
                 temp2 = product.slug
         context = {
-        'products': products,
-        'location_list': location_list,
-        'temp' : temp,
-        'temp1': temp1,
-        'temp2': temp2,
-        }
+         'products': products,
+         'location_list': location_list,
+         'temp' : temp,
+         'temp1': temp1,
+         'temp2': temp2,
+         'submitbutton':submitbutton,
+         }
     else:
         context = {
-            'products': products,
-            'location_list': location_list,
-             'temp': temp,
-             'temp1': temp1,
-             'temp2': temp2,
-        }
+             'products': products,
+             'location_list': location_list,
+             'temp': 'tabak-pachuli',
+             'temp1': 'lajmovyj',
+             'temp2': 'pchelinyj-voks',
+            'submitbutton': submitbutton,
+         }
 
     return render(request, "ingredients/sozdanie.html", context)
+
+
+# def sozdanie(request):
+#     submitbutton = request.POST.get("Submit")
+#     products = Product.objects.all()
+#     location_list = Sozdanie_svechi(request.POST)
+#     if location_list.is_valid():
+#         temp = location_list.cleaned_data.get('aroma')
+#         temp1 = location_list.cleaned_data.get('kras')
+#         temp2 = location_list.cleaned_data.get('wosk')
+#         context = {
+#         'products': products,
+#         'location_list': location_list,
+#         'temp' : temp,
+#         'temp1': temp1,
+#         'temp2': temp2,
+#         'submitbutton':submitbutton,
+#         }
+#     else:
+#         context = {
+#             'products': products,
+#             'location_list': location_list,
+#         }
+#
+#     return render(request, "ingredients/sozdanie.html", context)
+
+
 
 
 def s(request,slug, slug1, slug2):
