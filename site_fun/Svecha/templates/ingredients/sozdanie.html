@@ -1,35 +1,28 @@
 {% extends "base_generic.html" %}
-
+{% block title %} Создание красивой свечи {% endblock %}
 
 <!-- с load  пытался сделать стиль к оглавнению .-->
 {% block content %}
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-</head>
- <link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-<body>
-
-<div class="container">
-
-    <h3>  <a> Выберите ингредиенты: </a></h3>
+<div class="features">
+    <h3>  Выберите ингредиенты: </h3>
     <p></p>
     <form method=POST action="">
         {% csrf_token %}
-
-            <table>
-            {{ location_list }}
-
-
-
-            <table>
-
-                <input type = "Submit" value = "Подтвердить"  >
+        {{ location_list.aroma }} </p>
+        {{ location_list.kras }} </p>
+        {{ location_list.wosk }} </p>
+        <button class="btn btn-success"   type = "Submit"  > Подтвердить </button>
     </form>
+</div>
+{% endblock %}
 
 
 
 
-               <h2> <a href="{% url 'Svecha:s' temp temp1 temp2 %}">Посмотреть на свечу</a> </h2>
+
+
+
+<!--
 
 
 <!--                {% for product in products %}-->
@@ -54,10 +47,3 @@
 
 
 <!--                {% endfor %}-->
-
-
-</div>
-</body
-
-
-{% endblock %}

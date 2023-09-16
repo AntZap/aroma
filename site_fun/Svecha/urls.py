@@ -5,8 +5,10 @@ app_name = 'Svecha'
 
 urlpatterns = [
     #"""Домашняя страница"""
-    path('', views.product_list, name='product_list'),
+    path('', views.index, name='home'),
     #"""Страница по категориям"""
+    path('sostavlyushie', views.product_list, name='product_list'),
+
     path('<slug:category_slug>/', views.ing, name='sostav'),
     #""прописанное условие в файле list передает id  и англ название, а после этого показывает информацию о нужном составляющем"""
     path('<int:id>/<slug:slug>/', views.product_detail, name='ingredients_detail'),

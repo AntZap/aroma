@@ -1,34 +1,23 @@
 {% extends "base_generic.html" %}
 
-
+{% block title %} Составляющие {% endblock %}
 <!-- с load  пытался сделать стиль к оглавнению .-->
 {% block content %}
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-</head>
- <link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-        <body>
-            <div>
-
-                <h1> <a >  Добро пожаловать в игру, в которой можно создать красивую свечу!</h1>
-
-                <h1> <a > Полный перечень всех ингредиентов для создания свечи:</h1>
-            </div>
+<div class="features">
+    <h1>   Добро пожаловать в игру, в которой можно создать красивую свечу!</h1>
+    <p>  Полный перечень всех ингредиентов для создания свечи:</p>
 
    <!-- Пробегаем по представлению с ингредиентами и составляющими, в каждом ингредиенте есть свои составляющие с точной привязкой. Мы пробегаем по продуктам и проверяем
     есть ли привязка к этому ингредиенту и тогда показываем список. в названии добавляем ссылку на делати. чтобы открыть вкладку с названием этого составляющего
     для этого указываем ссылку на детали в svecha/urls и дальше отображаем id продукта и английское наименование.
     делали этой ссылки прописываем в detail-->
-  <ul>
-    {{product_list}}
-      {% for ingredient in ingredients %}
-        <h2><li><a href="{% url 'Svecha:sostav' ingredient.slug %}">{{ ingredient.name }} </a></li> </h2>
 
-
-      </p>
+        {{product_list}}
+        {% for ingredient in ingredients %}
+        <a href="{% url 'Svecha:sostav' ingredient.slug %}"> <li>{{ ingredient.name }} </li></a>
         {% endfor %}
-  </ul>
 
+</div>
 {% endblock %}
 
 

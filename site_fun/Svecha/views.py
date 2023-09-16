@@ -1,12 +1,17 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Ingredients, Product
 from .forms import Sozdanie_svechi
+
+
+
+def index(request):
+    return render(request, 'ingredients/index.html',)
 
 def product_list(request, category_slug=None):
     """" Страница списка составляющих"""
     category = None
     ingredients = Ingredients.objects.all()
-    products = Product.objects.all() #filter(ingredients=[i for i in ingredients])
+    products = Product.objects.all()
     if category_slug:
         category = get_object_or_404(Ingredients, slug=category_slug)
         products = products.filter(ingredients=category)
@@ -35,10 +40,10 @@ def ing(request, category_slug=None):
 
 # Create your views here.
 def sozdanie(request,):
-    submitbutton = request.POST.get("Submit")
     products = Product.objects.all()
     location_list = Sozdanie_svechi()
-    if request.POST:
+    if request.method == "POST":
+        # location_list = Sozdanie_svechi(request.POST)
         temp = request.POST['aroma']
         for product in products :
             if temp == product.name:
@@ -51,22 +56,11 @@ def sozdanie(request,):
         for product in products:
             if temp2 == product.name:
                 temp2 = product.slug
-        context = {
-         'products': products,
-         'location_list': location_list,
-         'temp' : temp,
-         'temp1': temp1,
-         'temp2': temp2,
-         'submitbutton':submitbutton,
-         }
-    else:
-        context = {
+
+        return redirect ('Svecha:s',temp,temp1,temp2)
+    context = {
              'products': products,
              'location_list': location_list,
-             'temp': 'tabak-pachuli',
-             'temp1': 'lajmovyj',
-             'temp2': 'pchelinyj-voks',
-            'submitbutton': submitbutton,
          }
 
     return render(request, "ingredients/sozdanie.html", context)
