@@ -5,10 +5,11 @@ from .forms import Sozdanie_svechi
 
 
 def index(request):
+    """" Главная страница"""
     return render(request, 'ingredients/index.html',)
 
 def product_list(request, category_slug=None):
-    """" Страница списка составляющих"""
+    """" Страница списка классов ингредиентов для свечи"""
     category = None
     ingredients = Ingredients.objects.all()
     products = Product.objects.all()
@@ -19,27 +20,27 @@ def product_list(request, category_slug=None):
     return render(request, 'ingredients/list.html', context,)
 
 
-def product_detail(request, id, slug):
-    """ Страница ингредиента"""
-    product = get_object_or_404(Product, id=id, slug=slug)
-    context = {'product': product}
-    return render(request, 'ingredients/detail.html', context,)
-
-def ing(request, category_slug=None):
-    """" Страница списка составляющих"""
+def Ingredient_list(request, category_slug=None):
+    """" Страница списка составляющих ингредиентов для каждого класса ингрединента"""
     category = None
     ingredients = Ingredients.objects.all()
-    products = Product.objects.all() #filter(ingredients=[i for i in ingredients])
+    products = Product.objects.all()
     if category_slug:
         category = get_object_or_404(Ingredients, slug=category_slug)
         products = products.filter(ingredients=category)
     context = {'category': category, 'ingredients': ingredients, 'products': products}
-    return render(request, 'ingredients/ing.html', context,)
+    return render(request, 'ingredients/Ingredient_list.html', context,)
 
 
+def product_detail(request, id, slug):
+    """ Страница описания каждого составляющего ингредиента"""
+    product = get_object_or_404(Product, id=id, slug=slug)
+    context = {'product': product}
+    return render(request, 'ingredients/detail.html', context,)
 
 # Create your views here.
 def sozdanie(request,):
+    """" Страница с формой где мы выбираем составляющие свечи, а затем получаем свечу с описание ингредиентов"""
     products = Product.objects.all()
     location_list = Sozdanie_svechi()
     if request.method == "POST":
@@ -57,13 +58,29 @@ def sozdanie(request,):
             if temp2 == product.name:
                 temp2 = product.slug
 
-        return redirect ('Svecha:s',temp,temp1,temp2)
+        return redirect ('Svecha:res_svecha',temp,temp1,temp2)
     context = {
              'products': products,
              'location_list': location_list,
          }
 
     return render(request, "ingredients/sozdanie.html", context)
+
+
+
+def res_svecha(request,slug, slug1, slug2):
+    """ Страница c результатом получившейся свечи"""
+    product1 = get_object_or_404(Product, slug = slug)
+    product2 = get_object_or_404(Product, slug = slug1)
+    product3= get_object_or_404(Product, slug=slug2)
+    context = {'product1': product1, 'product2': product2, 'product3': product3,}
+    return render(request, 'ingredients/res_svecha.html', context,)
+
+
+
+
+
+
 
 
 # def sozdanie(request):
@@ -90,13 +107,3 @@ def sozdanie(request,):
 #
 #     return render(request, "ingredients/sozdanie.html", context)
 
-
-
-
-def s(request,slug, slug1, slug2):
-    """ Страница ингредиента"""
-    product1 = get_object_or_404(Product, slug = slug)
-    product2 = get_object_or_404(Product, slug = slug1)
-    product3= get_object_or_404(Product, slug=slug2)
-    context = {'product1': product1, 'product2': product2, 'product3': product3,}
-    return render(request, 'ingredients/s.html', context,)

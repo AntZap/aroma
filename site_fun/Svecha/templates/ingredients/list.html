@@ -14,7 +14,7 @@
 
         {{product_list}}
         {% for ingredient in ingredients %}
-        <a href="{% url 'Svecha:sostav' ingredient.slug %}"> <li>{{ ingredient.name }} </li></a>
+        <a href="{% url 'Svecha:Ingredient_list' ingredient.slug %}"> <li>{{ ingredient.name }} </li></a>
         {% endfor %}
 
 </div>

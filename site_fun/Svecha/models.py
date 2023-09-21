@@ -2,13 +2,13 @@ from django.db import models
 from django.urls import reverse
 
 class Ingredients(models.Model):
-    """Составляющие свечи"""
-    name = models.CharField(max_length=150, db_index=True, verbose_name='Ингредиенты')
+    """Основные классы ингредиентов, из которых создается свеча"""
+    name = models.CharField(max_length=150, db_index=True, verbose_name='Ингредиент')
     slug = models.SlugField(max_length=150, unique=True)
 
     class Meta:
         ordering = ('name',)
-        verbose_name = 'Ингредиенты'
+        verbose_name = 'Ингредиент'
         verbose_name_plural = 'Ингредиенты'
 
     def __str__(self):
@@ -19,9 +19,9 @@ class Ingredients(models.Model):
 
 
 class Product(models.Model):
-    """Модель описания составных продуктов"""
+    """Модель описания составляющих ингредиентов, из которых создается свеча"""
     ingredients = models.ForeignKey(Ingredients, related_name='ingredients', on_delete=models.CASCADE, verbose_name='Ингредиент')
-    name = models.CharField(max_length=200, db_index=True, verbose_name='Наменование')
+    name = models.CharField(max_length=200, db_index=True, verbose_name='Наименование')
     slug = models.SlugField(max_length=200, db_index=True)
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True, verbose_name='Фото')
     description = models.TextField(blank=True, verbose_name='Описание')
@@ -34,7 +34,7 @@ class Product(models.Model):
     class Meta:
         ordering = ('name',)
         index_together = (('id', 'slug'),)
-        verbose_name = 'Составляющие'
+        verbose_name = 'Составляющее'
         verbose_name_plural = 'Составляющие'
 
     def __str__(self):
