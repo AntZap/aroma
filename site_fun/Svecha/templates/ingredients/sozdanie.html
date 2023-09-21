@@ -1,0 +1,49 @@
+{% extends "base_generic.html" %}
+{% block title %} Создание красивой свечи {% endblock %}
+
+
+{% block content %}
+<div class="features">
+    <h3>  Выберите ингредиенты: </h3>
+    <p></p>
+    <form method=POST action="">
+        {% csrf_token %}
+        {{ location_list.aroma }} </p>
+        {{ location_list.kras }} </p>
+        {{ location_list.wosk }} </p>
+        <button class="btn btn-success"   type = "Submit"  > Подтвердить </button>
+    </form>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+<!--
+
+
+<!--                {% for product in products %}-->
+
+<!--                    {% if  temp == product.slug   %}-->
+
+<!--                    <h2> <a > <li>{{ product.name }}</li> </h2>-->
+<!--                    <h3> <a > <li>{{ product.description }}</li> </h3>-->
+<!--                    <h3> <a > <li>{{ product.primechanie }}</li> </h3>-->
+<!--                    {% endif %}-->
+
+<!--                    {% if temp1 == product.slug%}-->
+<!--                    <h2> <a > <li>{{ product.name }}</li> </h2>-->
+<!--                    <h3> <a > <li>{{ product.description }}</li> </h3>-->
+<!--                    <h3> <a > <li>{{ product.primechanie }}</li> </h3>-->
+<!--                    {% endif %}-->
+<!--                    {% if temp2 == product.slug %}-->
+<!--                    <h2> <a > <li>{{ product.name }}</li> </h2>-->
+<!--                    <h3> <a > <li>{{ product.description }}</li> </h3>-->
+<!--                    <h3> <a > <li>{{ product.primechanie }}</li> </h3>-->
+<!--                    {% endif %}-->
+
+
+<!--                {% endfor %}-->

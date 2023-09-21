@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+{% block title %} Результат {% endblock %}
+
+{% block content %}
+
+<!-- Пробегаем по представлению с ингредиентами и составляющими, в каждом ингредиенте есть свои составляющие с точной привязкой. Мы пробегаем по продуктам и проверяем
+    есть ли привязка к этому ингридиенту и тогда показываем список. в названии добавляем ссылку на делати. чтобы открыть вкладку с названием этого составляющего
+    для этого указываем ссылку на детали в svecha/urls и дальше отображаем id продукта и английское наименование.
+    делали этой ссылки прописываем в detail-->
+<div class="features">
+    <h2>  {{ product1.name }} </h2>
+    <h3>  {{ product1.description }} </h3>
+    <h3>  {{ product1.primechanie }} </h3>
+    <h2>  {{ product2.name }} </h2>
+    <h3>  {{ product2.description }} </h3>
+    <h3>  {{ product2.primechanie }} </h3>
+    <h2>  {{ product3.name }} </h2>
+    <h3>  {{ product3.description }} </h3>
+    <h3>  {{ product3.primechanie }} </h3>
+</div>
+{% endblock %}
