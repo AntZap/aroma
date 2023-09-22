@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from uuid import uuid4
+from pytils.translit import slugify
 
 class Ingredients(models.Model):
     """Основные классы ингредиентов, из которых создается свеча"""
@@ -42,3 +44,24 @@ class Product(models.Model):
 
     def get_absolute_url(self):
             return reverse('Svecha:ingredients_detail', args=[self.id, self.slug,],)
+
+    def save(self, *args, **kwargs):
+        """
+        Сохранение полей модели при их отсутствии заполнения , например при загрузке из файла
+        """
+        if not self.slug:
+            self.slug = unique_slugify(self, self.name)
+        super().save(*args, **kwargs)
+
+
+
+
+def unique_slugify(instance, slug):
+    """
+    Генератор уникальных SLUG для моделей, в случае существования такого SLUG.,а также автоматическое заполнение если будет пусто, например при загрузке из файла
+    """
+    model = instance.__class__
+    unique_slug = slugify(slug)
+    while model.objects.filter(slug=unique_slug).exists():
+        unique_slug = f'{unique_slug}-{uuid4().hex[:8]}'
+    return unique_slug

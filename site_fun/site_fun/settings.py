@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Svecha.apps.SvechaConfig',
+    'import_export',
+
 ]
 
 MIDDLEWARE = [
