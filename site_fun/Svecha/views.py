@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Ingredients, Product
 from .forms import Sozdanie_svechi
-
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
 def index(request):
@@ -25,10 +25,20 @@ def Ingredient_list(request, category_slug=None):
     category = None
     ingredients = Ingredients.objects.all()
     products = Product.objects.all()
+
     if category_slug:
         category = get_object_or_404(Ingredients, slug=category_slug)
         products = products.filter(ingredients=category)
-    context = {'category': category, 'ingredients': ingredients, 'products': products}
+    #""" Берем список компонентов и указывает отображение 9 на странице (метон пагинатор), затем получает номер страницы, и убираем исключения"""
+    paginator = Paginator(products, 9)
+    page = request.GET.get('page')
+    try:
+        page_obj = paginator.get_page(page)
+    except PageNotAnInteger:
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)
+    context = {"page_obj": page_obj, 'category': category, 'ingredients': ingredients, 'products': products, }
     return render(request, 'ingredients/Ingredient_list.html', context,)
 
 

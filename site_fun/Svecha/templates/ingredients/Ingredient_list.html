@@ -6,15 +6,24 @@
 
  <!-- Указываю категорию. она одна подтягивается по slug  в представлениях. дальше просто пробегаемся по всем продуктам, они там же фильтруются по категории-->
 <div class="features">
-    <h1>  Категория: </h1>
-    <p>{{ing}}</p>
-    <a > {{ category}} </a>
+    <h2 >  Категория: {{ category}} </h2>
     <ul>
-        {% for product in products %}
+        {% for product in page_obj %}
         <a href="{% url 'Svecha:ingredients_detail' product.id product.slug  %}"><li>{{ product.name}} </li> </a>
         {% endfor %}
     </ul>
 
+    <ul>
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"><h4 >Назад</h4></a>
+        {% endif %}
+
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"><h4 >Следующая</h4> </a>
+        {% endif %}
+    </ul>
 </div>
 {% endblock %}
 
